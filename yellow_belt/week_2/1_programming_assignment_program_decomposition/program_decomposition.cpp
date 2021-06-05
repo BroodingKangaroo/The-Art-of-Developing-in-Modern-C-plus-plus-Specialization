@@ -21,22 +21,22 @@ struct Query {
 };
 
 istream& operator >> (istream& is, Query& q) {
-    string operation_code; cin >> operation_code;
+    string operation_code; is >> operation_code;
     if (operation_code == "NEW_BUS") {
         int stop_count;
         q.stops.clear();
         q.type = QueryType::NewBus;
-        cin >> q.bus >> stop_count;
+        is >> q.bus >> stop_count;
         while (stop_count--) {
-            string stop; cin >> stop;
+            string stop; is >> stop;
             q.stops.push_back(stop);
         }
     } else if (operation_code == "BUSES_FOR_STOP") {
         q.type = QueryType::BusesForStop;
-        cin >> q.stop;
+        is >> q.stop;
     } else if (operation_code == "STOPS_FOR_BUS") {
         q.type = QueryType::StopsForBus;
-        cin >> q.bus;
+        is >> q.bus;
     } else {
         q.type = QueryType::AllBuses;
     }
@@ -53,9 +53,9 @@ ostream& operator << (ostream& os, const BusesForStopResponse& r) {
         os << "No stop" << endl;
     } else {
         for (const string& bus : r.buses_for_stop) {
-            cout << bus << " ";
+            os << bus << " ";
         }
-        cout << endl;
+        os << endl;
     }
     return os;
 }
