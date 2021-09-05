@@ -11,28 +11,31 @@
 
 using namespace std;
 
-struct Events {
-    list<string> ordered;
-    set<string> unique;
+class Events {
+public:
+    Events(const string &event);
 
-    Events(const string& event) {
-        Insert(event);
-    }
+    void Insert(const string &event);
 
-    void Insert(const string& event) {
-        ordered.push_back(event);
-        unique.insert(event);
-    }
+    bool Contains(const string &event) const;
 
-    bool Contains(const string& event) const {
-        return unique.count(event);
-    }
+    const string &GetLast() const;
 
-    const string& GetLast() const {
-        return ordered.back();
-    }
+    bool Empty() const;
 
+    const set<string> &GetUnique() const;
 
+    const list<string> &GetOrdered() const;
+
+    void Erase(list<string>::iterator iterator);
+
+    list<string>::iterator Begin();
+
+    list<string>::iterator End();
+
+private:
+    list<string> ordered_;
+    set<string> unique_;
 };
 
 class Database {
