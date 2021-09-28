@@ -22,7 +22,7 @@ public:
 
     void Add(string document);
 
-    const vector<pair<size_t, size_t>>& Lookup(const string_view &word_view) const;
+    const vector<pair<size_t, size_t>>& Lookup(string_view word_view) const;
 
 private:
     unordered_map<string_view, vector<pair<size_t, size_t>>> index;
@@ -40,12 +40,6 @@ public:
     void UpdateDocumentBase(istream &document_input);
 
     void AddQueriesStream(istream &query_input, ostream &search_results_output);
-
-    ~SearchServer() {
-        for (auto& future: futures) {
-            future.get();
-        }
-    }
 
 private:
     Synchronized<InvertedIndex> index;

@@ -95,7 +95,7 @@ void InvertedIndex::Add(string document) {
     }
 }
 
-const vector<pair<size_t, size_t>> &InvertedIndex::Lookup(const string_view &word_view) const {
+const vector<pair<size_t, size_t>> &InvertedIndex::Lookup(string_view word_view) const {
     if (auto it = index.find(word_view); it != index.end()) {
         return it->second;
     } else {
